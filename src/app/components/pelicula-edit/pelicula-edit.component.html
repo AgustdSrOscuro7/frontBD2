@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>{{ idPelicula === 'nuevo' ? 'Nueva Película' : 'Editar Película' }}</h2>
+    <form (ngSubmit)="guardar()" #forma="ngForm">
+      <div class="form-group">
+        <label for="Titulo">Título</label>
+        <input type="text" class="form-control" id="Titulo" [(ngModel)]="unaPelicula.Titulo" name="Titulo" required>
+      </div>
+      <div class="form-group">
+        <label for="Descripcion">Descripción</label>
+        <textarea class="form-control" id="Descripcion" [(ngModel)]="unaPelicula.Descripcion" name="Descripcion" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="FechaLanzamiento">Fecha de Lanzamiento</label>
+        <input type="date" class="form-control" id="FechaLanzamiento" [(ngModel)]="unaPelicula.FechaLanzamiento" name="FechaLanzamiento" required>
+      </div>
+      <div class="form-group">
+        <label for="Img">URL de la Imagen</label>
+        <input type="text" class="form-control" id="Img" [(ngModel)]="unaPelicula.Img" name="Img" required>
+      </div>
+      <div class="form-group" *ngIf="unaPelicula.Img">
+        <img [src]="unaPelicula.Img" class="img-thumb" alt="Imagen de la película">
+      </div>
+      <button [disabled]="!forma.form.valid" type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+  
