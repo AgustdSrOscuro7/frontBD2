@@ -1,26 +1,70 @@
 <div class="container">
-    <h2>{{ idPelicula === 'nuevo' ? 'Nueva Película' : 'Editar Película' }}</h2>
-    <form (ngSubmit)="guardar()" #forma="ngForm">
-      <div class="form-group">
-        <label for="Titulo">Título</label>
-        <input type="text" class="form-control" id="Titulo" [(ngModel)]="unaPelicula.Titulo" name="Titulo" required>
-      </div>
-      <div class="form-group">
-        <label for="Descripcion">Descripción</label>
-        <textarea class="form-control" id="Descripcion" [(ngModel)]="unaPelicula.Descripcion" name="Descripcion" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="FechaLanzamiento">Fecha de Lanzamiento</label>
-        <input type="date" class="form-control" id="FechaLanzamiento" [(ngModel)]="unaPelicula.FechaLanzamiento" name="FechaLanzamiento" required>
-      </div>
-      <div class="form-group">
-        <label for="Img">URL de la Imagen</label>
-        <input type="text" class="form-control" id="Img" [(ngModel)]="unaPelicula.Img" name="Img" required>
-      </div>
-      <div class="form-group" *ngIf="unaPelicula.Img">
-        <img [src]="unaPelicula.Img" class="img-thumb" alt="Imagen de la película">
-      </div>
-      <button [disabled]="!forma.form.valid" type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-  </div>
-  
+  <h2>{{ idPelicula === 'nuevo' ? 'Nueva Película' : 'Editar Película' }}</h2>
+
+  <form (ngSubmit)="guardar()" #forma="ngForm">
+    <div class="form-group">
+      <label><b>ID</b></label>
+      <input
+        [(ngModel)]="unaPelicula._id"
+        name="_id"
+        type="text"
+        class="form-control"
+        placeholder="Id"
+        required
+        disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label><b>Título</b></label>
+      <input
+        [(ngModel)]="unaPelicula.Titulo"
+        name="Titulo"
+        type="text"
+        class="form-control"
+        placeholder="Título"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label><b>Descripción</b></label>
+      <textarea
+        [(ngModel)]="unaPelicula.Descripcion"
+        name="Descripcion"
+        class="form-control"
+        placeholder="Descripción"
+        required
+        rows="4"
+        cols="60"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label><b>Fecha de Lanzamiento</b></label>
+      <input
+        [(ngModel)]="unaPelicula.FechaLanzamiento"
+        name="FechaLanzamiento"
+        type="date"
+        class="form-control"
+        placeholder="Fecha de Lanzamiento"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label><b>URL de la Imagen</b></label>
+      <input
+        [(ngModel)]="unaPelicula.Img"
+        name="Img"
+        type="text"
+        class="form-control"
+        placeholder="URL de la Imagen"
+        required
+      />
+      <img [src]="unaPelicula.Img" class="img-thumb" *ngIf="unaPelicula.Img" />
+    </div>
+
+    <button [disabled]="!forma.valid" type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>

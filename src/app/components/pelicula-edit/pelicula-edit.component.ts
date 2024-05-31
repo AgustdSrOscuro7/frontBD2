@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeliculasService } from '../../services/peliculas.service';
 import { Pelicula } from '../../interfaces/pelicula.interface';
 import Swal from 'sweetalert2';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-pelicula-edit',
@@ -11,15 +10,15 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./pelicula-edit.component.css']
 })
 export class PeliculaEditComponent {
-  idPelicula!: string;
+  idPelicula!: any;
 
   unaPelicula: Pelicula = {
-    Id: '',
+    _id: '-1',
+    
     Descripcion: '',
     FechaLanzamiento: '',
     Img: '',
     Titulo: '',
-    ImgPeliculas: ''
   };
 
   unResultado!: any;
@@ -38,16 +37,14 @@ export class PeliculaEditComponent {
       if (this.idPelicula !== 'nuevo') {
         this.cargarPeliculaBD();
       }
+      console.log(this.unaPelicula);
     });
   }
 
   async cargarPeliculaBD() {
-    try {
-      const data: Pelicula = await firstValueFrom(this.dataBD.getUnaPelicula(this.idPelicula));
-      this.unaPelicula = data;
-    } catch (error) {
-      console.error(error);
-    }
+    await this.dataBD.getUnaPelicula(this.idPelicula).toPromise().then((data: any) => {
+      this.unaPelicula = data.resp;
+    });
   }
 
   guardar() {

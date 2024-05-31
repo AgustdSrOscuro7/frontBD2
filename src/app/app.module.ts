@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +10,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and ReactiveFormsModule imports
 
 @NgModule({
   declarations: [
@@ -23,11 +24,12 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
 
-    //Aqui involucro el HTTPClientModule para realizar las perticiones RESTFUL
+    // Aquí involucro el HttpClientModule para realizar las peticiones RESTFUL
     HttpClientModule,
      
-    //Aqui involucramos el Forms Module
+    // Aquí involucramos el FormsModule y ReactiveFormsModule
     FormsModule,
+    ReactiveFormsModule  // Añadir ReactiveFormsModule a imports
   ],
   providers: [],
   bootstrap: [AppComponent]
