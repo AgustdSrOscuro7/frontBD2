@@ -5,6 +5,7 @@ import { HeroesListComponent } from './components/heroes-list/heroes-list.compon
 import { HeroeEditComponent } from './components/heroe-edit/heroe-edit.component';
 import { ImagenesListComponent } from './components/imagenes-list/imagenes-list.component';
 import { ImagenesEditComponent } from './components/imagenes-edit/imagenes-edit.component';
+import { PeliculasListComponent} from './components/peliculas-list/peliculas-list.component';
 
 const routes: Routes = [
   { path: 'hogar', component: HomeComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'heroeedit/:idheroe', component: HeroeEditComponent },
   { path: 'imagenes', component: ImagenesListComponent},
   { path: 'imagenesedit/:idimagen', component: ImagenesEditComponent},
+  { path: 'peliculas', component: PeliculasListComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 
 ];

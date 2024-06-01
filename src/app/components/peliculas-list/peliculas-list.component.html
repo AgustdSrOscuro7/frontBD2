@@ -1,1 +1,45 @@
-<p>peliculas-list works!</p>
+<p>Lista de Películas</p>
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <button [routerLink]="['/home']" class="btn btn-outline-danger">
+      <i class="fa fa-undo"></i> Regresar
+    </button>
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Third group">
+    <button [routerLink]="['/peliculaedit', 'nuevo']" type="button" class="btn btn-outline-success">
+      <i class="fa fa-plus"></i> Nueva Película
+    </button>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Fecha de Lanzamiento</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pelicula of peliculas; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ pelicula.Titulo }}</td>
+      <td>{{ pelicula.Descripcion }}</td>
+      <td>{{ pelicula.FechaLanzamiento }}</td>
+      <td><img [src]="pelicula.Img" alt="{{ pelicula.Titulo }}" width="50"></td>
+      <td>
+        <button (click)="eliminarPelicula(pelicula._id)" type="button" class="btn btn-outline-danger btn-block">
+          <i class="fa fa-trash"></i> Eliminar
+        </button>
+        <button [routerLink]="['/peliculaedit', pelicula._id]" type="button" class="btn btn-outline-success btn-block">
+          <i class="fa fa-edit"></i> Editar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

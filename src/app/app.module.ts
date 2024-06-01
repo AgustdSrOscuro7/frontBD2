@@ -10,7 +10,7 @@ import { ImagenesListComponent } from './components/imagenes-list/imagenes-list.
 import { ImagenesEditComponent } from './components/imagenes-edit/imagenes-edit.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { PeliculasListComponent } from './components/peliculas-list/peliculas-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and ReactiveFormsModule imports
 
@@ -22,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and
     ImagenesListComponent,
     NavbarComponent,
     HomeComponent,
-    ImagenesEditComponent
+    ImagenesEditComponent,
+    PeliculasListComponent
   ],
   imports: [
     BrowserModule,
