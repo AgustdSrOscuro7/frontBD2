@@ -13,7 +13,7 @@ export class MongoDBService {
     public http: HttpClient) { }
 
   getHeroes(): any {
-    let url = `${URL_SERVICIOS_MONGODB}/heroes`;
+    let url = `${URL_SERVICIOS_MONGODB}/api/heroes`;
 
     return this.http.get(url).pipe(
       map((data) => {
@@ -24,7 +24,7 @@ export class MongoDBService {
   }
 
   getUnHeroe(unId:string): any{
-    let url = `${URL_SERVICIOS_MONGODB}/heroes/${unId}`;
+    let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unId}`;
 
     return this.http.get(url).pipe(
       map((data) => {
@@ -40,7 +40,7 @@ export class MongoDBService {
     if (unaAccion === 'eliminar') {
       let parametros2 = new HttpParams();
 
-      let url = `${URL_SERVICIOS_MONGODB}/heroes/${unHeroe._id}`;
+      let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unHeroe._id}`;
 
       return this.http.delete(url).pipe(
         map((data) => {
@@ -59,21 +59,21 @@ export class MongoDBService {
     */
     if (unaAccion === 'insertar') {
       let parametros2 = new HttpParams();
-      let url = URL_SERVICIOS_MONGODB+ '/heroes';
+      let url = URL_SERVICIOS_MONGODB+ '/api/heroes';
 
       // Begin assigning parameters
-      parametros2 = parametros2.append('nombre',unHeroe.nombre);
-      parametros2 = parametros2.append('bio',unHeroe.bio);
-      parametros2 = parametros2.append('img',unHeroe.img);
       parametros2 = parametros2.append('aparicion',unHeroe.aparicion);
+      parametros2 = parametros2.append('bio',unHeroe.bio);
       parametros2 = parametros2.append('casa',unHeroe.casa);
+      parametros2 = parametros2.append('img',unHeroe.img);
+      parametros2 = parametros2.append('nombre',unHeroe.nombre);
 
       const body = {
-        nombre:unHeroe.nombre,
-        bio:unHeroe.bio,
-        img:unHeroe.img,
         aparicion:unHeroe.aparicion,
+        bio:unHeroe.bio,
         casa:unHeroe.casa,
+        img:unHeroe.img,
+        nombre:unHeroe.nombre
       };
 
       return this.http.post(url, body).pipe(map((data) => data));
@@ -82,26 +82,26 @@ export class MongoDBService {
     if (unaAccion === 'modificar') {
       let parametros = new HttpParams();
 
-      let url = `${URL_SERVICIOS_MONGODB}/heroes/${unHeroe._id}`;
+      let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unHeroe._id}`;
 
       //let url = URL_SERVICIOS_MONGODB + '/heroes';
 
       // Begin assigning parameters
-      parametros = parametros.append('nombre',unHeroe.nombre);
-      parametros = parametros.append('bio',unHeroe.bio);
-      parametros = parametros.append('img',unHeroe.img);
       parametros = parametros.append('aparicion',unHeroe.aparicion);
+      parametros = parametros.append('bio',unHeroe.bio);
       parametros = parametros.append('casa',unHeroe.casa);
+      parametros = parametros.append('img',unHeroe.img);
+      parametros = parametros.append('nombre',unHeroe.nombre);
 
       const body = {
-        nombre:unHeroe.nombre,
-        bio:unHeroe.bio,
-        img:unHeroe.img,
         aparicion:unHeroe.aparicion,
+        bio:unHeroe.bio,
         casa:unHeroe.casa,
+        img:unHeroe.img,
+        nombre:unHeroe.nombre
       };
 
-      //console.log(parametros);
+      console.log(parametros);
       return this.http.put(url, body).pipe(map((data) => data));
     }
   }

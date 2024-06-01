@@ -1,8 +1,8 @@
 export interface Heroe{
     _id?: string;
-    nombre: string;
-    bio: string;
-    img: string;
     aparicion: string;
+    bio: string;
     casa: string;
+    img: string;
+    nombre: string;
   };

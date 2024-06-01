@@ -1,1 +1,11 @@
-<p>imagenes-list works!</p>
+<!-- src/app/components/imagenes-list/imagenes-list.component.html -->
+<div>
+  <h2>Lista de Imágenes</h2>
+  <ul>
+    <li *ngFor="let imagen of imagenes">
+      <img [src]="imagen.url" alt="{{ imagen.descripcion }}">
+      <p>{{ imagen.descripcion }}</p>
+      <button (click)="eliminarImagen(imagen)">Eliminar</button>
+    </li>
+  </ul>
+</div>

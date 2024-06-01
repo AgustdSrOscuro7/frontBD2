@@ -1,1 +1,15 @@
-<p>imagenes-edit works!</p>
+<!-- src/app/components/imagenes-edit/imagenes-edit.component.html -->
+<div>
+  <h2>{{ imagen._id ? 'Editar Imagen' : 'Nueva Imagen' }}</h2>
+  <form (ngSubmit)="guardarImagen()">
+    <div>
+      <label for="url">URL</label>
+      <input type="text" id="url" [(ngModel)]="imagen.url" name="url" required>
+    </div>
+    <div>
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" [(ngModel)]="imagen.descripcion" name="descripcion" required></textarea>
+    </div>
+    <button type="submit">{{ imagen._id ? 'Actualizar' : 'Guardar' }}</button>
+  </form>
+</div>

@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesListComponent } from './components/heroes-list/heroes-list.component';
 import { HeroeEditComponent } from './components/heroe-edit/heroe-edit.component';
+import { ImagenesListComponent } from './components/imagenes-list/imagenes-list.component';
+import { ImagenesEditComponent } from './components/imagenes-edit/imagenes-edit.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 
@@ -17,13 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and
     AppComponent,
     HeroesListComponent,
     HeroeEditComponent,
+    ImagenesListComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ImagenesEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    FormsModule,
     // Aquí involucro el HttpClientModule para realizar las peticiones RESTFUL
     HttpClientModule,
      
