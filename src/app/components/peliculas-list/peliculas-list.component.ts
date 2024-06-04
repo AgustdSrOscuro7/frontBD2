@@ -27,7 +27,7 @@ export class PeliculasListComponent implements OnInit {
   eliminarPelicula(id: string | undefined): void {
     if (id) {
       this.peliculasService.crud_Peliculas({ _id: id } as Pelicula, 'eliminar').subscribe(
-        (data: any) => {
+        () => {
           this.peliculas = this.peliculas.filter(pelicula => pelicula._id !== id);
         },
         (error: any) => {
@@ -39,3 +39,4 @@ export class PeliculasListComponent implements OnInit {
     }
   }
 }
+

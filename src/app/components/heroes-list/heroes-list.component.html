@@ -29,11 +29,11 @@
   <tbody>
     <tr *ngFor="let heroe of Heroes; let i = index">
       <th scope="row">{{i+1}}</th>
-      <td>{{heroe.aparicion}}</td>
-      <td>{{heroe.bio}}</td>
-      <td>{{heroe.casa}}</td>
-      <td>{{heroe.img}}</td>
-      <td>{{heroe.nombre}}</td>
+      <td>{{heroe.Aparicion}}</td>
+      <td>{{heroe.Bio}}</td>
+      <td>{{heroe.Casa}}</td>
+      <td>{{heroe.Img}}</td>
+      <td>{{heroe.Nombre}}</td>
       <td>
         <button (click)="eliminarHeroe(heroe._id)" type="button" class="btn btn-outline-danger btn-block">
           <i class="fa fa-trash"></i> Eliminar

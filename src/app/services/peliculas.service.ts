@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pelicula } from '../interfaces/pelicula.interface';
 import { URL_SERVICIOS_MONGODB } from '../config/url.servicios';
@@ -18,7 +18,7 @@ export class PeliculasService {
     return this.http.get<any>(url).pipe(
       map(response => {
         console.log('DATOS', response);
-        return response.peliculas;  // Aquí ajustamos para devolver solo el array de películas
+        return response.peliculas; // Here we adjust to return only the array of movies
       })
     );
   }
@@ -34,6 +34,7 @@ export class PeliculasService {
     );
   }
 
+  // Agregar console.log para depurar la solicitud de modificación
   crud_Peliculas(unaPelicula: Pelicula, unaAccion: string): Observable<any> {
     if (unaAccion === 'eliminar') {
       const url = `${URL_SERVICIOS_MONGODB}/api/peliculas/${unaPelicula._id}`;
@@ -47,14 +48,18 @@ export class PeliculasService {
     if (unaAccion === 'insertar') {
       const url = `${URL_SERVICIOS_MONGODB}/api/peliculas`;
       const body = {
-        Titulo: unaPelicula.Titulo,
         Descripcion: unaPelicula.Descripcion,
         Img: unaPelicula.Img,
-        FechaLanzamiento: unaPelicula.FechaLanzamiento
+        FechaLanzamiento: unaPelicula.FechaLanzamiento,
+        Titulo: unaPelicula.Titulo
       };
+
+      // Imprimir los datos antes de enviar la solicitud
+      console.log('Datos de la película a insertar:', body);
 
       return this.http.post(url, body).pipe(
         map((data: any) => {
+          console.log('Película insertada:', data);
           return data;
         })
       );
@@ -63,19 +68,23 @@ export class PeliculasService {
     if (unaAccion === 'modificar') {
       const url = `${URL_SERVICIOS_MONGODB}/api/peliculas/${unaPelicula._id}`;
       const body = {
-        Titulo: unaPelicula.Titulo,
         Descripcion: unaPelicula.Descripcion,
+        FechaLanzamiento: unaPelicula.FechaLanzamiento,
         Img: unaPelicula.Img,
-        FechaLanzamiento: unaPelicula.FechaLanzamiento
+        Titulo: unaPelicula.Titulo
       };
+
+      // Imprimir los datos antes de enviar la solicitud
+      console.log('Datos de la película a modificar:', body);
 
       return this.http.put(url, body).pipe(
         map((data: any) => {
+          console.log('Película modificada:', data);
           return data;
         })
       );
     }
 
-    throw new Error(`Acción desconocida: ${unaAccion}`);
+    throw new Error(`Acción desconocida': ${unaAccion}`);
   }
 }

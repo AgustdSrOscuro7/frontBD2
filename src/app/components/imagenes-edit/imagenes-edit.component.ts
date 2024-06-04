@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ImagenesEditComponent implements OnInit {
   imagen: Imagen = {
-    url: '',
-    descripcion: ''
+    Url: '',
+    Descripcion: ''
   };
 
   constructor(

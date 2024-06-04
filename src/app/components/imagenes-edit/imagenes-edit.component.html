@@ -4,11 +4,11 @@
   <form (ngSubmit)="guardarImagen()">
     <div>
       <label for="url">URL</label>
-      <input type="text" id="url" [(ngModel)]="imagen.url" name="url" required>
+      <input type="text" id="url" [(ngModel)]="imagen.Url" name="url" required>
     </div>
     <div>
       <label for="descripcion">Descripción</label>
-      <textarea id="descripcion" [(ngModel)]="imagen.descripcion" name="descripcion" required></textarea>
+      <textarea id="descripcion" [(ngModel)]="imagen.Descripcion" name="descripcion" required></textarea>
     </div>
     <button type="submit">{{ imagen._id ? 'Actualizar' : 'Guardar' }}</button>
   </form>

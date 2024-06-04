@@ -11,6 +11,7 @@ import { ImagenesEditComponent } from './components/imagenes-edit/imagenes-edit.
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PeliculasListComponent } from './components/peliculas-list/peliculas-list.component';
+import { PeliculasEditComponent } from './components/peliculas-edit/peliculas-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and ReactiveFormsModule imports
 
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and
     NavbarComponent,
     HomeComponent,
     ImagenesEditComponent,
-    PeliculasListComponent
+    PeliculasListComponent,
+    PeliculasEditComponent
   ],
   imports: [
     BrowserModule,

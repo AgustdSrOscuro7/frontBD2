@@ -1,103 +1,77 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Imagen } from '../interfaces/imagenes.interface';
 import { URL_SERVICIOS_MONGODB } from '../config/url.servicios';
-import { map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImagenesService {
 
-  constructor(
-    public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getImagenes(): any {
-    let url = `${URL_SERVICIOS_MONGODB}/api/imagenes`;
+  getImagenes(): Observable<Imagen[]> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/imagenes`;
 
-    return this.http.get(url).pipe(
-      map((data) => {
+    return this.http.get<any>(url).pipe(
+      map(response => {
+        console.log('DATOS', response);
+        return response.imagenes; // Ajustar para devolver solo el array de imágenes
+      })
+    );
+  }
+
+  getUnaImagen(unId: string): Observable<Imagen> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unId}`;
+
+    return this.http.get<Imagen>(url).pipe(
+      map((data: Imagen) => {
         console.log('DATOS', data);
         return data;
       })
     );
   }
 
-  getUnaImagen(unId:string): any{
-    let url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unId}`;
-
-    return this.http.get(url).pipe(
-      map((data) => {
-        console.log('DATOS', data);
-        return data;
-      })
-    );
-  }
-
-  crud_Imagenes(unaImagen: Imagen, unaAccion: string):any {
-    //console.log(unExpediente);
-
+  crud_Imagenes(unaImagen: Imagen, unaAccion: string): Observable<any> {
     if (unaAccion === 'eliminar') {
-      let parametros2 = new HttpParams();
-
-      let url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unaImagen._id}`;
-
+      const url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unaImagen._id}`;
       return this.http.delete(url).pipe(
-        map((data) => {
+        map((data: any) => {
           return data;
         })
       );
     }
 
-    /*
-    nombre: string;
-    bio: string;
-    img: string;
-    aparicion: string;
-    casa: string;
-    _id?: string;
-    */
     if (unaAccion === 'insertar') {
-      let parametros2 = new HttpParams();
-      let url = URL_SERVICIOS_MONGODB+ '/api/imagenes';
-
-      // Begin assigning parameters
-      parametros2 = parametros2.append('Url',unaImagen.url);
-      parametros2 = parametros2.append('Descripcion',unaImagen.descripcion);
-      
-
+      const url = `${URL_SERVICIOS_MONGODB}/api/imagenes`;
       const body = {
-        Url:unaImagen.url,
-        Descripcion:unaImagen.descripcion,
+        Descripcion: unaImagen.Descripcion,
+        Url: unaImagen.Url
       };
 
-      return this.http.post(url, body).pipe(map((data) => data));
+      return this.http.post(url, body).pipe(
+        map((data: any) => {
+          return data;
+        })
+      );
     }
 
     if (unaAccion === 'modificar') {
-      let parametros = new HttpParams();
-
-      let url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unaImagen._id}`;
-
-      //let url = URL_SERVICIOS_MONGODB + '/aPunaImagens';
-
-      // Begin assigning parameters
-      parametros = parametros.append('Url',unaImagen.url);
-      parametros = parametros.append('Descripcion',unaImagen.descripcion);
-      
+      const url = `${URL_SERVICIOS_MONGODB}/api/imagenes/${unaImagen._id}`;
       const body = {
-        Url:unaImagen.url,
-        Descripcion:unaImagen.descripcion,
+        Descripcion: unaImagen.Descripcion,
+        Url: unaImagen.Url
       };
 
-      //console.log(parametros);
-      return this.http.put(url, body).pipe(map((data) => data));
+      return this.http.put(url, body).pipe(
+        map((data: any) => {
+          return data;
+        })
+      );
     }
+
+    throw new Error(`Acción desconocida: ${unaAccion}`);
   }
-
-
-  
-
 }
-
-

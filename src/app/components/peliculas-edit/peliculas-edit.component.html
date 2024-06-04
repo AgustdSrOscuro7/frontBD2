@@ -1,1 +1,46 @@
-<p>peliculas-edit works!</p>
+<div class="container">
+  <h2>{{ esNuevo ? 'Nueva Película' : 'Editar Película' }}</h2>
+
+  <form [formGroup]="peliculaForm" (ngSubmit)="guardarPelicula()">
+    
+
+    <div class="form-group">
+      <label for="Descripcion">Descripción</label>
+      <textarea id="Descripcion" formControlName="Descripcion" class="form-control"></textarea>
+      <div *ngIf="peliculaForm.get('Descripcion')?.invalid && peliculaForm.get('Descripcion')?.touched" class="text-danger">
+        La descripción es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="FechaLanzamiento">Fecha de Lanzamiento</label>
+      <input type="date" id="FechaLanzamiento" formControlName="FechaLanzamiento" class="form-control" />
+      <div *ngIf="peliculaForm.get('FechaLanzamiento')?.invalid && peliculaForm.get('FechaLanzamiento')?.touched" class="text-danger">
+        La fecha de lanzamiento es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Img">Imagen (URL)</label>
+      <input type="text" id="Img" formControlName="Img" class="form-control" />
+      <div *ngIf="peliculaForm.get('Img')?.invalid && peliculaForm.get('Img')?.touched" class="text-danger">
+        La URL de la imagen es requerida.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="Titulo">Título</label>
+      <input type="text" id="Titulo" formControlName="Titulo" class="form-control" />
+      <div *ngIf="peliculaForm.get('Titulo')?.invalid && peliculaForm.get('Titulo')?.touched" class="text-danger">
+        El título es requerido.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="peliculaForm.invalid">
+      {{ esNuevo ? 'Crear' : 'Guardar' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">
+      Cancelar
+    </button>
+  </form>
+</div>

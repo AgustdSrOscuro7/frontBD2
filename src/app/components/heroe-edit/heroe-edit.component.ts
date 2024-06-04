@@ -13,11 +13,11 @@ export class HeroeEditComponent {
   idHeroe!: any;
 
   unHeroe: Heroe = {
-    nombre: '',
-    bio: '',
-    img: '',
-    aparicion: '',
-    casa: '',
+    Nombre: '',
+    Bio: '',
+    Img: '',
+    Aparicion: '',
+    Casa: '',
     _id: '-1',
   };
 

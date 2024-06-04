@@ -1,11 +1,41 @@
-<!-- src/app/components/imagenes-list/imagenes-list.component.html -->
-<div>
-  <h2>Lista de Imágenes</h2>
-  <ul>
-    <li *ngFor="let imagen of imagenes">
-      <img [src]="imagen.url" alt="{{ imagen.descripcion }}">
-      <p>{{ imagen.descripcion }}</p>
-      <button (click)="eliminarImagen(imagen)">Eliminar</button>
-    </li>
-  </ul>
+<p>Lista de Imágenes</p>
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <button [routerLink]="['/home']" class="btn btn-outline-danger">
+      <i class="fa fa-undo"></i> Regresar
+    </button>
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Third group">
+    <button [routerLink]="['/imagenedit', 'nuevo']" type="button" class="btn btn-outline-success">
+      <i class="fa fa-plus"></i> Nueva Imagen
+    </button>
+  </div>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Url</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let imagen of imagenes; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{imagen.Descripcion}}</td>
+      <td>{{imagen.Url}}</td>
+      <td>
+        <button (click)="eliminarImagen(imagen._id)" type="button" class="btn btn-outline-danger btn-block">
+          <i class="fa fa-trash"></i> Eliminar
+        </button>
+        <button [routerLink]="['/imagenedit', imagen._id]" type="button" class="btn btn-outline-success btn-block">
+          <i class="fa fa-edit"></i> Editar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

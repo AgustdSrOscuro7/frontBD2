@@ -1,4 +1,4 @@
-<p>Lista de Películas</p>
+<p>Lista de Peliculas</p>
 
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group me-2" role="group" aria-label="First group">
@@ -9,7 +9,7 @@
 
   <div class="btn-group" role="group" aria-label="Third group">
     <button [routerLink]="['/peliculaedit', 'nuevo']" type="button" class="btn btn-outline-success">
-      <i class="fa fa-plus"></i> Nueva Película
+      <i class="fa fa-plus"></i> Nueva Pelicula
     </button>
   </div>
 </div>
@@ -18,20 +18,21 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Título</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Fecha de Lanzamiento</th>
-      <th scope="col">Imagen</th>
-      <th scope="col">Acciones</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">FechaLanzamiento</th>
+      <th scope="col">Img</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Accion</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let pelicula of peliculas; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ pelicula.Titulo }}</td>
-      <td>{{ pelicula.Descripcion }}</td>
-      <td>{{ pelicula.FechaLanzamiento }}</td>
-      <td><img [src]="pelicula.Img" alt="{{ pelicula.Titulo }}" width="50"></td>
+      <th scope="row">{{i+1}}</th>
+      
+      <td>{{pelicula.Descripcion}}</td>
+      <td>{{pelicula.FechaLanzamiento}}</td>
+      <td>{{pelicula.Img}}</td>
+      <td>{{pelicula.Titulo}}</td>
       <td>
         <button (click)="eliminarPelicula(pelicula._id)" type="button" class="btn btn-outline-danger btn-block">
           <i class="fa fa-trash"></i> Eliminar

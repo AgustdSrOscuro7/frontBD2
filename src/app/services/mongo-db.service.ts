@@ -62,18 +62,18 @@ export class MongoDBService {
       let url = URL_SERVICIOS_MONGODB+ '/api/heroes';
 
       // Begin assigning parameters
-      parametros2 = parametros2.append('aparicion',unHeroe.aparicion);
-      parametros2 = parametros2.append('bio',unHeroe.bio);
-      parametros2 = parametros2.append('casa',unHeroe.casa);
-      parametros2 = parametros2.append('img',unHeroe.img);
-      parametros2 = parametros2.append('nombre',unHeroe.nombre);
+      parametros2 = parametros2.append('Aparicion',unHeroe.Aparicion);
+      parametros2 = parametros2.append('Bio',unHeroe.Bio);
+      parametros2 = parametros2.append('Casa',unHeroe.Casa);
+      parametros2 = parametros2.append('Img',unHeroe.Img);
+      parametros2 = parametros2.append('Nombre',unHeroe.Nombre);
 
       const body = {
-        aparicion:unHeroe.aparicion,
-        bio:unHeroe.bio,
-        casa:unHeroe.casa,
-        img:unHeroe.img,
-        nombre:unHeroe.nombre
+        Aparicion:unHeroe.Aparicion,
+        bio:unHeroe.Bio,
+        casa:unHeroe.Casa,
+        img:unHeroe.Img,
+        nombre:unHeroe.Nombre
       };
 
       return this.http.post(url, body).pipe(map((data) => data));
@@ -87,18 +87,18 @@ export class MongoDBService {
       //let url = URL_SERVICIOS_MONGODB + '/heroes';
 
       // Begin assigning parameters
-      parametros = parametros.append('aparicion',unHeroe.aparicion);
-      parametros = parametros.append('bio',unHeroe.bio);
-      parametros = parametros.append('casa',unHeroe.casa);
-      parametros = parametros.append('img',unHeroe.img);
-      parametros = parametros.append('nombre',unHeroe.nombre);
+      parametros = parametros.append('Aparicion',unHeroe.Aparicion);
+      parametros = parametros.append('bio',unHeroe.Bio);
+      parametros = parametros.append('casa',unHeroe.Casa);
+      parametros = parametros.append('img',unHeroe.Img);
+      parametros = parametros.append('nombre',unHeroe.Nombre);
 
       const body = {
-        aparicion:unHeroe.aparicion,
-        bio:unHeroe.bio,
-        casa:unHeroe.casa,
-        img:unHeroe.img,
-        nombre:unHeroe.nombre
+        Aparicion:unHeroe.Aparicion,
+        bio:unHeroe.Bio,
+        casa:unHeroe.Casa,
+        img:unHeroe.Img,
+        nombre:unHeroe.Nombre
       };
 
       console.log(parametros);
