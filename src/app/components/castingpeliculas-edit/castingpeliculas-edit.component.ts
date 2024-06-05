@@ -21,15 +21,12 @@ export class CastingEditComponent implements OnInit {
   ) {
     this.castingForm = this.fb.group({
       Personaje: ['', Validators.required],
-      // Agrega aquí más campos para editar, como el ID de la película y el ID del héroe
+      PeliculasId: ['', Validators.required], // Añade campo para el ID de la película
+      HeroesId: ['', Validators.required],    // Añade campo para el ID del héroe
     });
   }
 
   ngOnInit(): void {
-    this.obtenerCasting();
-  }
-
-  obtenerCasting(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.esNuevo = false;

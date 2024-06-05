@@ -1,47 +1,67 @@
-<p>Lista de Películas</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Películas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Lista de Películas</h1>
 
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group me-2" role="group" aria-label="First group">
-    <button [routerLink]="['/home']" class="btn btn-outline-danger">
-      <i class="fa fa-undo"></i> Regresar
-    </button>
+    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+        <button [routerLink]="['/home']" class="btn btn-outline-danger">
+          <i class="fa fa-undo"></i> Regresar
+        </button>
+      </div>
+      <div class="btn-group" role="group" aria-label="Third group">
+        <button [routerLink]="['/peliculaedit', 'nuevo']" type="button" class="btn btn-outline-success">
+          <i class="fa fa-plus"></i> Nueva Película
+        </button>
+      </div>
+    </div>
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Fecha de Lanzamiento</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Título</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pelicula of peliculas; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{pelicula.Descripcion}}</td>
+          <td>{{pelicula.FechaLanzamiento}}</td>
+          <td>
+            <img [src]="pelicula.Img" alt="{{ pelicula.Titulo }}" style="max-width: 100px; max-height: 100px;">
+          </td>
+          <td>{{pelicula.Titulo}}</td>
+          <td>
+            <button (click)="eliminarPelicula(pelicula._id)" type="button" class="btn btn-outline-danger btn-block">
+              <i class="fa fa-trash"></i> Eliminar
+            </button>
+            <button [routerLink]="['/peliculaedit', pelicula._id]" type="button" class="btn btn-outline-success btn-block">
+              <i class="fa fa-edit"></i> Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="btn-group" role="group" aria-label="Third group">
-    <button [routerLink]="['/peliculaedit', 'nuevo']" type="button" class="btn btn-outline-success">
-      <i class="fa fa-plus"></i> Nueva Película
-    </button>
-  </div>
-</div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Fecha de Lanzamiento</th>
-      <th scope="col">Imagen</th>
-      <th scope="col">Título</th>
-      <th scope="col">Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let pelicula of peliculas; let i = index">
-      <th scope="row">{{i + 1}}</th>
-      <td>{{pelicula.Descripcion}}</td>
-      <td>{{pelicula.FechaLanzamiento}}</td>
-      <td>
-        <img [src]="pelicula.Img" alt="{{ pelicula.Titulo }}" style="max-width: 100px; max-height: 100px;">
-      </td>
-      <td>{{pelicula.Titulo}}</td>
-      <td>
-        <button (click)="eliminarPelicula(pelicula._id)" type="button" class="btn btn-outline-danger btn-block">
-          <i class="fa fa-trash"></i> Eliminar
-        </button>
-        <button [routerLink]="['/peliculaedit', pelicula._id]" type="button" class="btn btn-outline-success btn-block">
-          <i class="fa fa-edit"></i> Editar
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

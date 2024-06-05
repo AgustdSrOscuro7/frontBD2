@@ -1,104 +1,81 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MongoDBService } from '../../services/mongo-db.service';
 import { Heroe } from '../../interfaces/heroe.interface';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-heroe-edit',
+  selector: 'app-heroes-edit',
   templateUrl: './heroe-edit.component.html',
   styleUrls: ['./heroe-edit.component.css']
 })
 export class HeroeEditComponent implements OnInit {
-  heroe: Heroe = {
-    _id: '',
-    Id: '', // Cambiado de Id a _id
-    Nombre: '',
-    Bio: '',
-    Img: '',
-    Aparicion: '',
-    Casa: ''
-  };
+  heroForm: FormGroup;
+  isNew = true;
+  heroId: string | null = null;
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private dataBD: MongoDBService
-  ) { }
+    private mongoDBService: MongoDBService
+  ) {
+    this.heroForm = this.fb.group({
+      Aparicion: ['', Validators.required],
+      Bio: ['', Validators.required],
+      Casa: ['', Validators.required],
+      Img: ['', Validators.required],
+      Nombre: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    
-    if (id) {
-      this.dataBD.getUnHeroe(id).subscribe((response: Heroe) => {
-        this.heroe = response;
-        console.log(this.heroe); // Verifica si recibes los datos del héroe en la consola
-      }, error => {
-        console.error('Error al obtener el héroe:', error);
-      });
-    } else {
-      console.error('El id del héroe no está definido');
+    this.heroId = this.route.snapshot.paramMap.get('id');
+    if (this.heroId) {
+      this.isNew = false;
+      this.mongoDBService.getUnHeroe(this.heroId).subscribe(
+        (hero: Heroe) => {
+          this.heroForm.patchValue(hero);
+        },
+        error => {
+          console.error('Error loading hero:', error);
+        }
+      );
     }
   }
 
-  guardarCambios(): void {
-    if (this.heroe._id) { // Usar _id en lugar de Id
-      this.actualizarHeroe();
-    } else {
-      this.nuevoHeroe();
+  saveHero(): void {
+    if (this.heroForm.invalid) {
+      return;
+    }
+
+    const formValues: Heroe = this.heroForm.value;
+
+    if (this.isNew) {
+      this.mongoDBService.crud_Heroes(formValues, 'insertar').subscribe(
+        response => {
+          console.log('Hero created:', response);
+          this.router.navigate(['/home']); // Redirect to home
+        },
+        error => {
+          console.error('Error creating hero:', error);
+        }
+      );
+    } else if (this.heroId) {
+      formValues._id = this.heroId;
+      this.mongoDBService.crud_Heroes(formValues, 'modificar').subscribe(
+        response => {
+          console.log('Hero updated:', response);
+          this.router.navigate(['/home']); // Redirect to home
+        },
+        error => {
+          console.error('Error updating hero:', error);
+        }
+      );
     }
   }
 
-  private actualizarHeroe() {
-    const id = this.heroe._id; // Obtener el _id del héroe
-    if (id) {
-      this.dataBD.putHeroe(id, this.heroe).subscribe(() => { // Pasar _id y el objeto heroe
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Héroe actualizado exitosamente',
-          icon: 'success',
-          timer: 2000,
-          timerProgressBar: true
-        }).then(() => {
-          this.router.navigate(['/heroes']);
-        });
-      },
-      (error: any) => {
-        Swal.fire({
-          title: 'Error',
-          text: 'Error al actualizar el héroe',
-          icon: 'error',
-          timer: 2000,
-          timerProgressBar: true
-        });
-        console.error('Error al actualizar el héroe:', error);
-      });
-    } else {
-      console.error('El _id del héroe no está definido');
-    }
-  }
-
-  private nuevoHeroe() {
-    this.dataBD.postHeroe(this.heroe).subscribe(() => { // Pasar solo el objeto heroe
-      Swal.fire({
-        title: 'Éxito',
-        text: 'Héroe creado exitosamente',
-        icon: 'success',
-        timer: 2000,
-        timerProgressBar: true
-      }).then(() => {
-        this.router.navigate(['/heroes']);
-      });
-    },
-    (error: any) => {
-      Swal.fire({
-        title: 'Error',
-        text: 'Error al crear el héroe',
-        icon: 'error',
-        timer: 2000,
-        timerProgressBar: true
-      });
-      console.error('Error al crear el héroe:', error);
-    });
+  cancel(): void {
+    this.router.navigate(['/home']); // Redirect to home
   }
 }

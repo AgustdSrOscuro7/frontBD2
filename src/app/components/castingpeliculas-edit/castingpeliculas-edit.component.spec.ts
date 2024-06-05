@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CastingpeliculasEditComponent } from './castingpeliculas-edit.component';
+import { CastingEditComponent } from './castingpeliculas-edit.component';
 
 describe('CastingpeliculasEditComponent', () => {
-  let component: CastingpeliculasEditComponent;
-  let fixture: ComponentFixture<CastingpeliculasEditComponent>;
+  let component: CastingEditComponent;
+  let fixture: ComponentFixture<CastingEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CastingpeliculasEditComponent]
+      imports: [CastingEditComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CastingpeliculasEditComponent);
+    fixture = TestBed.createComponent(CastingEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

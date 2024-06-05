@@ -1,58 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editar Casting de Película</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-  <div class="container mt-5">
-    <h2 class="mb-4">{{ esNuevo ? 'Nuevo Casting de Película' : 'Editar Casting de Película' }}</h2>
-  
-    <form [formGroup]="castingForm" (ngSubmit)="guardarCasting()">
-      
-      <div class="form-group">
-        <label for="Personaje">Personaje</label>
-        <input type="text" id="Personaje" formControlName="Personaje" class="form-control" />
-        <div *ngIf="castingForm.get('Personaje')?.invalid && castingForm.get('Personaje')?.touched" class="text-danger">
-          El personaje es requerido.
-        </div>
-      </div>
-  
-      <!-- Campo para el ID de la película -->
-      <div class="form-group">
-        <label for="PeliculaID">ID de la Película</label>
-        <input type="text" id="PeliculaID" formControlName="PeliculaID" class="form-control" />
-        <div *ngIf="castingForm.get('PeliculaID')?.invalid && castingForm.get('PeliculaID')?.touched" class="text-danger">
-          El ID de la película es requerido.
-        </div>
-      </div>
-  
-      <!-- Campo para el ID del héroe -->
-      <div class="form-group">
-        <label for="HeroeID">ID del Héroe</label>
-        <input type="text" id="HeroeID" formControlName="HeroeID" class="form-control" />
-        <div *ngIf="castingForm.get('HeroeID')?.invalid && castingForm.get('HeroeID')?.touched" class="text-danger">
-          El ID del héroe es requerido.
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="castingForm.invalid">
-        {{ esNuevo ? 'Crear' : 'Guardar' }}
-      </button>
-      <button type="button" class="btn btn-secondary" (click)="cancelar()">
-        Cancelar
-      </button>
-    </form>
-  </div>
-  
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+<div class="container">
+  <h2>{{ esNuevo ? 'Crear Nuevo Casting' : 'Editar Casting' }}</h2>
+  <form [formGroup]="castingForm" (ngSubmit)="guardarCasting()">
+    <div class="form-group">
+      <label for="personaje">Personaje:</label>
+      <input type="text" class="form-control" id="personaje" formControlName="Personaje">
+    </div>
+    <div class="form-group">
+      <label for="peliculaId">ID de la Película:</label>
+      <input type="text" class="form-control" id="peliculaId" formControlName="PeliculasId">
+    </div>
+    <div class="form-group">
+      <label for="heroeId">ID del Héroe:</label>
+      <input type="text" class="form-control" id="heroeId" formControlName="HeroesId">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ esNuevo ? 'Crear' : 'Guardar' }}</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

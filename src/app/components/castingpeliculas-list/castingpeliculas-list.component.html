@@ -1,27 +1,58 @@
-<p>Listado de Casting de Películas</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de Casting de Películas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+  <div class="container mt-5">
+    <h2>Listado de Casting de Películas</h2>
 
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group me-2" role="group" aria-label="First group">
-    <button [routerLink]="['/home']" class="btn btn-outline-danger">
-      <i class="fa fa-undo"></i> Regresar
-    </button>
+    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+        <button [routerLink]="['/home']" class="btn btn-outline-danger">
+          <i class="fa fa-undo"></i> Regresar
+        </button>
+      </div>
+      <div class="btn-group" role="group" aria-label="Third group">
+        <button [routerLink]="['/castingedit', 'nuevo']" type="button" class="btn btn-outline-success">
+          <i class="fa fa-plus"></i> Nuevo Casting
+        </button>
+      </div>
+    </div>
+
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>Personaje</th>
+          <th>Película</th>
+          
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let casting of castingList">
+          <td>{{ casting.Personaje }}</td>
+          <td>{{ casting.Pelicula.Titulo }}</td>
+          <td *ngIf="casting.Heroe">{{ casting.Heroe.Nombre }}</td>
+          <td>
+            <button (click)="eliminarCasting(casting)" class="btn btn-danger btn-sm">
+              <i class="fa fa-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="btn-group" role="group" aria-label="Third group">
-    <button [routerLink]="['/castingedit', 'nuevo']" type="button" class="btn btn-outline-success">
-      <i class="fa fa-plus"></i> Nuevo Casting
-    </button>
-  </div>
-</div>
-
-<div class="container">
-  <h2>Listado de Casting de Películas</h2>
-  <ul>
-    <li *ngFor="let casting of castingList">
-      <p>Personaje: {{ casting.Personaje }}</p>
-      <p>Película: {{ casting.Pelicula.Titulo }}</p>
-      <p *ngIf="casting.Heroe">Héroe: {{ casting.Heroe.Nombre }}</p>
-      <button (click)="eliminarCasting(casting)" class="btn btn-danger btn-sm float-end">Eliminar</button>
-    </li>
-  </ul>
-</div>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
