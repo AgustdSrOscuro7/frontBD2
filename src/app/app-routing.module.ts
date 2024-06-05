@@ -7,7 +7,9 @@ import { ImagenesListComponent } from './components/imagenes-list/imagenes-list.
 import { ImagenesEditComponent } from './components/imagenes-edit/imagenes-edit.component';
 import { PeliculasListComponent} from './components/peliculas-list/peliculas-list.component';
 import { PeliculasEditComponent} from './components/peliculas-edit/peliculas-edit.component';
-
+import { CastingListComponent } from './components/castingpeliculas-list/castingpeliculas-list.component';
+import { CastingEditComponent } from './components/castingpeliculas-edit/castingpeliculas-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: 'hogar', component: HomeComponent },
@@ -18,6 +20,9 @@ const routes: Routes = [
   { path: 'imagenesedit/:idimagen', component: ImagenesEditComponent},
   { path: 'peliculas', component: PeliculasListComponent},
   { path: 'peliculaedit/:idpelicula', component: PeliculasEditComponent},
+  { path: 'casting', component: CastingListComponent},
+  { path: 'castingedit/:idcasting', component: CastingEditComponent},
+  { path: 'login', component: LoginComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 
 ];

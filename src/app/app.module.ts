@@ -12,9 +12,12 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PeliculasListComponent } from './components/peliculas-list/peliculas-list.component';
 import { PeliculasEditComponent } from './components/peliculas-edit/peliculas-edit.component';
+import { CastingListComponent} from './components/castingpeliculas-list/castingpeliculas-list.component';
+import { CastingEditComponent } from './components/castingpeliculas-edit/castingpeliculas-edit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and ReactiveFormsModule imports
-
+import { RouterModule } from '@angular/router'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,10 @@ import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and
     HomeComponent,
     ImagenesEditComponent,
     PeliculasListComponent,
-    PeliculasEditComponent
+    PeliculasEditComponent, 
+    CastingListComponent,
+    CastingEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Combine FormsModule and
      
     // Aquí involucramos el FormsModule y ReactiveFormsModule
     FormsModule,
-    ReactiveFormsModule  // Añadir ReactiveFormsModule a imports
+    ReactiveFormsModule,
+    RouterModule // Añadir ReactiveFormsModule a imports
   ],
   providers: [],
   bootstrap: [AppComponent]

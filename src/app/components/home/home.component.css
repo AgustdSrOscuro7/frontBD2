@@ -1,0 +1,23 @@
+body {
+    background-color: #000;
+    color: #dd7d7d;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container p {
+    color: #ccc;
+    text-align: center;
+}

@@ -2,113 +2,50 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Heroe } from '../interfaces/heroe.interface';
 import { URL_SERVICIOS_MONGODB } from '../config/url.servicios';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MongoDBService {
 
-  constructor(
-    public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getHeroes(): any {
-    let url = `${URL_SERVICIOS_MONGODB}/api/heroes`;
-
-    return this.http.get(url).pipe(
-      map((data) => {
-        console.log('DATOS', data);
-        return data;
-      })
-    );
+  getHeroes(): Observable<any> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/heroes`;
+    return this.http.get(url).pipe(map(data => {
+      console.log('DATOS', data);
+      return data;
+    }));
   }
 
-  getUnHeroe(unId:string): any{
-    let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unId}`;
-
-    return this.http.get(url).pipe(
-      map((data) => {
-        console.log('DATOS', data);
-        return data;
-      })
-    );
+  getUnHeroe(unId: string): Observable<any> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unId}`;
+    return this.http.get(url).pipe(map(data => {
+      console.log('DATOS', data);
+      return data;
+    }));
   }
 
-  crud_Heroes(unHeroe: Heroe, unaAccion: string):any {
-    //console.log(unExpediente);
+  crud_Heroes(unHeroe: Heroe, unaAccion: string): Observable<any> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/heroes`;
 
-    if (unaAccion === 'eliminar') {
-      let parametros2 = new HttpParams();
-
-      let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unHeroe._id}`;
-
-      return this.http.delete(url).pipe(
-        map((data) => {
-          return data;
-        })
-      );
-    }
-
-    /*
-    nombre: string;
-    bio: string;
-    img: string;
-    aparicion: string;
-    casa: string;
-    _id?: string;
-    */
     if (unaAccion === 'insertar') {
-      let parametros2 = new HttpParams();
-      let url = URL_SERVICIOS_MONGODB+ '/api/heroes';
-
-      // Begin assigning parameters
-      parametros2 = parametros2.append('Aparicion',unHeroe.Aparicion);
-      parametros2 = parametros2.append('Bio',unHeroe.Bio);
-      parametros2 = parametros2.append('Casa',unHeroe.Casa);
-      parametros2 = parametros2.append('Img',unHeroe.Img);
-      parametros2 = parametros2.append('Nombre',unHeroe.Nombre);
-
-      const body = {
-        Aparicion:unHeroe.Aparicion,
-        bio:unHeroe.Bio,
-        casa:unHeroe.Casa,
-        img:unHeroe.Img,
-        nombre:unHeroe.Nombre
-      };
-
-      return this.http.post(url, body).pipe(map((data) => data));
-    }
-
-    if (unaAccion === 'modificar') {
-      let parametros = new HttpParams();
-
-      let url = `${URL_SERVICIOS_MONGODB}/api/heroes/${unHeroe._id}`;
-
-      //let url = URL_SERVICIOS_MONGODB + '/heroes';
-
-      // Begin assigning parameters
-      parametros = parametros.append('Aparicion',unHeroe.Aparicion);
-      parametros = parametros.append('bio',unHeroe.Bio);
-      parametros = parametros.append('casa',unHeroe.Casa);
-      parametros = parametros.append('img',unHeroe.Img);
-      parametros = parametros.append('nombre',unHeroe.Nombre);
-
-      const body = {
-        Aparicion:unHeroe.Aparicion,
-        bio:unHeroe.Bio,
-        casa:unHeroe.Casa,
-        img:unHeroe.Img,
-        nombre:unHeroe.Nombre
-      };
-
-      console.log(parametros);
-      return this.http.put(url, body).pipe(map((data) => data));
+      return this.http.post(url, unHeroe).pipe(map(data => data));
+    } else if (unaAccion === 'modificar') {
+      const updateUrl = `${url}/${unHeroe._id}`;
+      return this.http.put(updateUrl, unHeroe).pipe(map(data => data));
+    } else if (unaAccion === 'eliminar') {
+      const deleteUrl = `${url}/${unHeroe._id}`;
+      return this.http.delete(deleteUrl).pipe(map(data => data));
+    } else {
+      // Handle the case where `unaAccion` is not recognized
+      throw new Error(`Unknown action: ${unaAccion}`);
     }
   }
 
-
-  
-
+  borrarHeroe(id: string): Observable<any> {
+    const url = `${URL_SERVICIOS_MONGODB}/api/heroes/${id}`;
+    return this.http.delete(url).pipe(map(data => data));
+  }
 }
-
-

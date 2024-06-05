@@ -1,127 +1,52 @@
-
 <div class="container">
-    <p>heroe-edit works!</p>
+  <h2>{{ isNew ? 'Nuevo Héroe' : 'Editar Héroe' }}</h2>
 
-    <form (ngSubmit)="guardar()" #forma="ngForm">
-        
-        <!--
-        <div class="mb-3">
-            <label for="exampleInputId" class="form-label">ID</label>
-            <input 
-                   [(ngModel)]="unHeroe._id" 
-                   name="id" 
-                   type="text" 
-                   class="form-control" 
-                   id="exampleId" 
-                   aria-describedby="emailHelp"
-                   placeholder="Id" 
-                   required
-                   disabled>
-            <div id="emailHelp" 
-                  class="form-text">Este es el ID Mongo
-            </div>
-        </div>
+  <form [formGroup]="heroForm" (ngSubmit)="saveHero()">
+    <div class="form-group">
+      <label for="Nombre">Nombre</label>
+      <input type="text" id="Nombre" formControlName="Nombre" class="form-control" />
+      <div *ngIf="heroForm.get('Nombre')?.invalid && heroForm.get('Nombre')?.touched" class="text-danger">
+        El nombre es requerido.
+      </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="exampleInputNombre" class="form-label">Nombre</label>
-            <input 
-                   [(ngModel)]="unHeroe.nombre" 
-                   name="nombre" 
-                   type="text" 
-                   class="form-control" 
-                   id="exampleNombre" 
-                   aria-describedby="nombreHelp"
-                   placeholder="Nombre" 
-                   required>
-            <div id="nombreHelp" class="form-text">
-                Nombre Heroe
-            </div>
-        </div>
-        -->
-        <div class="form-group">
-            <label><b>ID</b></label>
-            <input
-              [(ngModel)]="unHeroe._id"
-              name="id"
-              type="text"
-              class="form-control"
-              placeholder="Id"
-              required
-              disabled
-            />
-          </div>
-  
-  
-          <div class="form-group">
-            <label><b>Nombre</b></label>
-            <input
-              [(ngModel)]="unHeroe.Nombre"
-              name="nombre"
-              type="text"
-              class="form-control"
-              placeholder="Nombre"
-              required
-            />
-          </div>
-  
-  
-         
-          <div class="form-group">
-            <label><b>Biografia</b></label>
-            <textarea
-              [(ngModel)]="unHeroe.Bio"
-              name="bio"
-              type="text"
-              class="form-control"
-              placeholder="Bio"
-              required
-              rows="4"
-              cols="60"
-            >
-            </textarea>
-          </div>
-  
-  
-          <div class="form-group">
-            <label><b>Imagen</b></label>
-            <input
-              [(ngModel)]="unHeroe.Img"
-              name="img"
-              type="text"
-              class="form-control"
-              placeholder="Imagen"
-              required
-            />
-            <img [src]="unHeroe.Img" class="img-thumb" />
-          </div>
-  
-  
-          <div class="form-group">
-            <label><b>Aparicion</b></label>
-            <input
-              [(ngModel)]="unHeroe.Aparicion"
-              name="Aparicion"
-              type="text"
-              class="form-control"
-              placeholder="Aparicion"
-              required
-            />
-          </div>
-  
-  
-          <div class="form-group">
-            <label><b>Casa</b></label>
-            <input
-              [(ngModel)]="unHeroe.Casa"
-              name="casa"
-              type="text"
-              class="form-control"
-              placeholder="Casa"
-              required
-            />
-          </div>
-  
+    <div class="form-group">
+      <label for="Aparicion">Aparición</label>
+      <input type="text" id="Aparicion" formControlName="Aparicion" class="form-control" />
+      <div *ngIf="heroForm.get('Aparicion')?.invalid && heroForm.get('Aparicion')?.touched" class="text-danger">
+        La aparición es requerida.
+      </div>
+    </div>
 
-        <button [disabled]="!forma.valid" type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="form-group">
+      <label for="Bio">Biografía</label>
+      <textarea id="Bio" formControlName="Bio" class="form-control"></textarea>
+      <div *ngIf="heroForm.get('Bio')?.invalid && heroForm.get('Bio')?.touched" class="text-danger">
+        La biografía es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Casa">Casa</label>
+      <input type="text" id="Casa" formControlName="Casa" class="form-control" />
+      <div *ngIf="heroForm.get('Casa')?.invalid && heroForm.get('Casa')?.touched" class="text-danger">
+        La casa es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Img">URL de la Imagen</label>
+      <input type="text" id="Img" formControlName="Img" class="form-control" />
+      <div *ngIf="heroForm.get('Img')?.invalid && heroForm.get('Img')?.touched" class="text-danger">
+        La URL de la imagen es requerida.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="heroForm.invalid">
+      {{ isNew ? 'Crear' : 'Guardar' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">
+      Cancelar
+    </button>
+  </form>
 </div>

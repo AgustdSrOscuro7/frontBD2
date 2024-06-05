@@ -1,12 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CastingPeliculaService } from '../../services/castingpelicula.service';
+import { CastingPelicula } from '../../interfaces/castingpelicula.interface';
 
 @Component({
-  selector: 'app-castingpeliculas-edit',
-  standalone: true,
-  imports: [],
+  selector: 'app-casting-edit',
   templateUrl: './castingpeliculas-edit.component.html',
-  styleUrl: './castingpeliculas-edit.component.css'
+  styleUrls: ['./castingpeliculas-edit.component.css']
 })
-export class CastingpeliculasEditComponent {
+export class CastingEditComponent implements OnInit {
+  castingForm: FormGroup;
+  esNuevo: boolean = true;
 
+  constructor(
+    private fb: FormBuilder,
+    private castingService: CastingPeliculaService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.castingForm = this.fb.group({
+      Personaje: ['', Validators.required],
+      // Agrega aquí más campos para editar, como el ID de la película y el ID del héroe
+    });
+  }
+
+  ngOnInit(): void {
+    this.obtenerCasting();
+  }
+
+  obtenerCasting(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.esNuevo = false;
+      this.castingService.getUnCastingPelicula(id).subscribe(
+        (data: CastingPelicula) => {
+          this.castingForm.patchValue(data);
+        },
+        (error: any) => {
+          console.error('Error al obtener el casting', error);
+        }
+      );
+    }
+  }
+
+  guardarCasting(): void {
+    if (this.castingForm.invalid) {
+      return;
+    }
+
+    const casting: CastingPelicula = this.castingForm.value;
+
+    if (this.esNuevo) {
+      this.castingService.crud_CastingPelicula(casting, 'insertar').subscribe(
+        (data: any) => {
+          console.log('Casting insertado:', data);
+          this.router.navigate(['/casting-list']);
+        },
+        (error: any) => {
+          console.error('Error al insertar el casting:', error);
+        }
+      );
+    } else {
+      casting._id = this.route.snapshot.paramMap.get('id')!;
+      this.castingService.crud_CastingPelicula(casting, 'modificar').subscribe(
+        (data: any) => {
+          console.log('Casting actualizado:', data);
+          this.router.navigate(['/casting-list']);
+        },
+        (error: any) => {
+          console.error('Error al actualizar el casting:', error);
+        }
+      );
+    }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/casting-list']);
+  }
 }

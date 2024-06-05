@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-4" style="width: 20rem;">
+      <h3 class="card-title text-center">Iniciar Sesión</h3>
+      <form (ngSubmit)="login()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+        <div class="mt-3 text-center">
+          <a href="#" class="link-secondary">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="mt-3 text-center">
+          <span>¿No tienes una cuenta? <a href="#" class="link-primary">Regístrate</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  

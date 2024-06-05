@@ -8,7 +8,7 @@
   </div>
 
   <div class="btn-group" role="group" aria-label="Third group">
-    <button [routerLink]="['/imagenedit', 'nuevo']" type="button" class="btn btn-outline-success">
+    <button [routerLink]="['/imagenesedit', 'nuevo']" type="button" class="btn btn-outline-success">
       <i class="fa fa-plus"></i> Nueva Imagen
     </button>
   </div>
@@ -27,12 +27,14 @@
     <tr *ngFor="let imagen of imagenes; let i = index">
       <th scope="row">{{i + 1}}</th>
       <td>{{imagen.Descripcion}}</td>
-      <td>{{imagen.Url}}</td>
+      <td>
+        <img [src]="imagen.Url" alt="{{ imagen.Descripcion }}" style="max-width: 100px; max-height: 100px;">
+      </td>
       <td>
         <button (click)="eliminarImagen(imagen._id)" type="button" class="btn btn-outline-danger btn-block">
           <i class="fa fa-trash"></i> Eliminar
         </button>
-        <button [routerLink]="['/imagenedit', imagen._id]" type="button" class="btn btn-outline-success btn-block">
+        <button [routerLink]="['/imagenesedit', imagen._id]" type="button" class="btn btn-outline-success btn-block">
           <i class="fa fa-edit"></i> Editar
         </button>
       </td>

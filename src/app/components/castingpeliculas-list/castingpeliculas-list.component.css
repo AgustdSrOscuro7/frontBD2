@@ -1,0 +1,52 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-toolbar {
+    margin-top: 20px;
+}
+
+.btn-group button {
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container h2 {
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 20px;
+    border-bottom: 1px solid #444;
+}
+
+ul li p {
+    margin: 0;
+}
+
+ul li button {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-top: 5px;
+}
+
+ul li button:hover {
+    background-color: #ff8533;
+}

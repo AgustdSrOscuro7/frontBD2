@@ -1,3 +1,58 @@
-.img-thumb {
-    width: 120px;
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-toolbar {
+    margin-top: 20px;
+}
+
+.btn-group button {
+    color: #fff;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.table th {
+    background-color: #333;
+}
+
+.table tr:nth-child(even) {
+    background-color: #000; /* Cambiamos el color de fondo de las filas pares a negro */
+}
+
+.table tr:hover {
+    background-color: #555;
+}
+
+.movie img {
+    width: 100px;
+    height: auto;
+}
+
+.button {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #ff8533;
 }

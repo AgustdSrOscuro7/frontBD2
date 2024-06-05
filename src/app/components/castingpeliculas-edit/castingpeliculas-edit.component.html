@@ -1,1 +1,26 @@
 <p>castingpeliculas-edit works!</p>
+
+<div class="container">
+    <h2>{{ esNuevo ? 'Nuevo Casting de Película' : 'Editar Casting de Película' }}</h2>
+  
+    <form [formGroup]="castingForm" (ngSubmit)="guardarCasting()">
+      
+      <div class="form-group">
+        <label for="Personaje">Personaje</label>
+        <input type="text" id="Personaje" formControlName="Personaje" class="form-control" />
+        <div *ngIf="castingForm.get('Personaje')?.invalid && castingForm.get('Personaje')?.touched" class="text-danger">
+          El personaje es requerido.
+        </div>
+      </div>
+  
+      <!-- Aquí puedes agregar más campos para editar, como el ID de la película y el ID del héroe -->
+  
+      <button type="submit" class="btn btn-primary" [disabled]="castingForm.invalid">
+        {{ esNuevo ? 'Crear' : 'Guardar' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+  
